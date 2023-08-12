@@ -7,6 +7,7 @@ export const getVerification = (value: UnwrapRef<string>)=>{
         url: `/sys/randomImage/${value}`,
         headers: {
             'X-Skip-Interceptor': true, // 在请求头中添加X-Skip-Interceptor头部来跳过拦截器
+            'X-Access-Token': 111
         },
     })
 }
