@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { UserOutlined, InfoCircleOutlined } from '@ant-design/icons-vue';
+import { UserOutlined } from '@ant-design/icons-vue';
 
 import {onMounted, ref} from "vue";
 import Cookie from 'js-cookie';
@@ -48,6 +48,7 @@ const onFinish =async (values: any) => {
       path: '/Home'
     })
   }else {
+    formState.verify =''
     await Toggle()
   }
 };
