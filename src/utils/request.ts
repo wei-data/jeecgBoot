@@ -38,7 +38,8 @@ export default class Axios {
             }
             if (token) {
                 // 设置请求头
-                config.headers.common['Authorization'] = token
+                // config.headers.Authorization = options.authenticationScheme ? `${options.authenticationScheme} ${token}` : token;
+                config.headers['X-Access-Token'] = token;
             }
             return config
         }, (error) => {
