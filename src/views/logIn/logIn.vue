@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { UserOutlined } from '@ant-design/icons-vue';
-
+import { UserOutlined,UnlockOutlined } from '@ant-design/icons-vue';
+import { message } from 'ant-design-vue';
 import {onMounted, ref} from "vue";
 import Cookie from 'js-cookie';
 import {useRouter } from 'vue-router'
@@ -14,7 +14,7 @@ const activeKey = ref('1');
 
 onMounted(async ()=>{
   // inputCode = '';
-  // TODO 兼容mock和接口，暂时这样处理
+  //TODO 兼容mock和接口，暂时这样处理
   checkKey.value = '1629428467008'; //new Date().getTime();
   const data:any = await getVerification(checkKey.value)
   console.log(data)
@@ -45,11 +45,13 @@ const onFinish =async (values: any) => {
   if(data.code===200){
     Cookie.set('myCookie', data.result.token)
     await router.push({
-      path: '/Home/Index'
+      path: '/Main/index'
     })
+    message.success('登录成功');
   }else {
     formState.verify =''
     await Toggle()
+    message.error(`${data.message}`);
   }
 };
 
@@ -81,7 +83,7 @@ const Toggle = async ()=>{
           >
             <a-input style="width: 90%"  v-model:value="formState.username" >
               <template #prefix>
-                <user-outlined type="user" />
+                <user-outlined />
               </template>
 <!--              <template #suffix>-->
 <!--                <a-tooltip title="Extra information">-->
@@ -108,6 +110,7 @@ const Toggle = async ()=>{
               <img
                   :width="80"
                   :src="url"
+                  alt="404"
                   @click="Toggle"
               />
             </div>
@@ -153,11 +156,58 @@ const Toggle = async ()=>{
   width: 250px;
 
 }
+//::v-deep :where(.css-dev-only-do-not-override-eq3tly).ant-input {
+//  width: 250px;
+//
+//}
 ::v-deep .ant-form-item-control-input-content {
   display: flex;
   justify-content: center;
 }
 ::v-deep :where(.css-dev-only-do-not-override-eq3tly).ant-tabs >.ant-tabs-nav .ant-tabs-nav-wrap, :where(.css-dev-only-do-not-override-eq3tly).ant-tabs >div>.ant-tabs-nav .ant-tabs-nav-wrap{
   justify-content: center;
+}
+/* 在较小的屏幕上，列宽为100% */
+@media (max-width: 767px) {
+  .ant-tabs {
+    width: 100%!important;
+  }
+  .box {
+    width: 80%!important;
+    height: 80%!important;
+    transform: translate(13%, 13%)!important;
+    background-image: url("../../../public/img/logInImg.webp");
+    background-size: 100% 100%;
+  }
+}
+
+/* 在较大的屏幕上，列宽为50% */
+@media (min-width: 767px) {
+  .ant-tabs {
+    width: 50%!important;
+  }
+  .box{
+    width: 60%!important;
+    height: 50%!important;
+    transform: translate(40%, 50%)!important;
+    //background: white;
+    //border-radius: 20px;
+    //background-image: url("../../../public/img/logInImg.webp");
+    background-size: 100% 100%;
+  }
+}
+@media (min-width: 1200px) {
+  .ant-tabs {
+    width: 40%!important;
+  }
+  .box{
+    width: 50%!important;
+    height: 60%!important;
+    transform: translate(50%, 40%)!important;
+    //background: white;
+    //border-radius: 20px;
+    background-image: url("../../../public/img/logInImg.webp");
+    background-size: 100% 100%;
+  }
 }
 </style>
