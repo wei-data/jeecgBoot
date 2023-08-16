@@ -14,8 +14,8 @@ export default class Axios {
         this.instance = axios.create(config);
         this.interQuest()
     }
-    public async request<T,D=responseType<T>>(config:AxiosRequestConfig):Promise<unknown>{
-        return new Promise(async(resolve, reject) => {
+    public async request<T, D = responseType<T>>(config: AxiosRequestConfig): Promise<unknown> {
+        return new Promise(async (resolve, reject) => {
             try {
                 const response = await this.instance.request<D>(config)
                 resolve(response.data)
@@ -38,17 +38,18 @@ export default class Axios {
             }
             if (token) {
                 // 设置请求头
-                config.headers['X-Access-Token'] = token
+                // config.headers.Authorization = options.authenticationScheme ? `${options.authenticationScheme} ${token}` : token;
+                config.headers['X-Access-Token'] = token;
             }
             return config
         }, (error) => {
             return Promise.reject(error)
         })
     }
-    private  interResponse(){
-        this.instance.interceptors.response.use((config)=>{
+    private interResponse() {
+        this.instance.interceptors.response.use((config) => {
             return config
-        },(error)=>{
+        }, (error) => {
             return Promise.reject(error)
         })
     }
