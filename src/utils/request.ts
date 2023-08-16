@@ -33,13 +33,13 @@ export default class Axios {
     private interRequest() {
         this.instance.interceptors.request.use((config) => {
             const token = Cookies.get('myCookie');
-            console.log(token)
             if (config.headers['X-Skip-Interceptor']) {
                 return config;
             }
             if (token) {
                 // 设置请求头
-                config.headers['X-Access-Token'] = token
+                // config.headers.Authorization = options.authenticationScheme ? `${options.authenticationScheme} ${token}` : token;
+                config.headers['X-Access-Token'] = token;
             }
             return config
         }, (error) => {

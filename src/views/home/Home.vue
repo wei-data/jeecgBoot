@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import {ref} from 'vue';
 import {
   UserOutlined,
   VideoCameraOutlined,
@@ -7,13 +7,15 @@ import {
   MenuUnfoldOutlined,
   MenuFoldOutlined,
 } from '@ant-design/icons-vue';
-const selectedKeys = ref<string[]>(['1']);
-const collapsed = ref<boolean>(false);
+console.log(router.options.history)
+const fn = () => {
+  return document.getElementById('fn')
+}
 </script>
 
 <template>
-  <a-layout style="height: 100vh">
     <a-layout-sider v-model:collapsed="collapsed" :trigger="null" collapsible>
+<<<<<<< HEAD
       <div class="logo" />
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
         <a-menu-item key="1">
@@ -26,16 +28,60 @@ const collapsed = ref<boolean>(false);
         </a-menu-item>
         <a-menu-item key="3">
           <upload-outlined />
+=======
+      <div class="logo"/>
+      <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
+        <a-sub-menu key="sub1">
+          <template #title>
+            <user-outlined/>
+            <span>Dashboard</span>
+          </template>
+          <a-menu-item key="/Home/workBench">
+            <router-link to="/Home/workBench">
+              <user-outlined/>
+              <span>工作台</span>
+            </router-link>
+          </a-menu-item>
+          <a-menu-item key="/Home/index">
+            <router-link to="/Home/index">
+              <user-outlined/>
+              <span>首页</span>
+            </router-link>
+          </a-menu-item>
+        </a-sub-menu>
+        <a-menu-item key="3">
+          <video-camera-outlined/>
+          <span>nav 2</span>
+        </a-menu-item>
+        <a-menu-item key="4">
+          <upload-outlined/>
+>>>>>>> 24034561a9110cc5f01a83a5bc92a5395f677c7e
           <span>nav 3</span>
         </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0 20px">
+<<<<<<< HEAD
         <menu-unfold-outlined v-if="collapsed" class="trigger" @click="() => (collapsed = !collapsed)" />
         <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)" />
       </a-layout-header>
       <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }">
+=======
+        <menu-unfold-outlined
+            v-if="collapsed"
+            class="trigger"
+            @click="() => (collapsed = !collapsed)"
+        />
+        <menu-fold-outlined v-else class="trigger" @click="() => (collapsed = !collapsed)"/>
+      </a-layout-header>
+      <a-layout-content
+          :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '284px' }"
+          style="overflow-y: scroll"
+          id="fn"
+      >
+        <a-back-top :target="fn"></a-back-top>
+>>>>>>> 24034561a9110cc5f01a83a5bc92a5395f677c7e
         <router-view></router-view>
       </a-layout-content>
     </a-layout>
