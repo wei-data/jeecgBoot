@@ -3,7 +3,7 @@ import {http} from "../../utils/Axios";
 export const getList = (value: any)=>{
     return http.request({
         method: 'get',
-        url: `/sys/fillRule/list`,
+        url: `/sys/checkRule/list`,
         params:value
     })
 }
@@ -11,7 +11,7 @@ export const getList = (value: any)=>{
 export const adList = (value: any)=>{
     return http.request({
         method: 'post',
-        url: `/sys/fillRule/add`,
+        url: `/sys/checkRule/add`,
         data:value
     })
 }
@@ -27,7 +27,7 @@ export const functionalTest = (value: any)=>{
 export const functionalDele = (value: any)=>{
     return http.request({
         method: 'delete',
-        url: `/sys/fillRule/delete`,
+        url: `/sys/checkRule/delete`,
         params:value
     })
 }
@@ -35,7 +35,7 @@ export const functionalDele = (value: any)=>{
 export const codingInquire = (value: any)=>{
     return http.request({
         method: 'get',
-        url: `/sys/fillRule/list`,
+        url: `/sys/checkRule/list`,
         params:value
     })
 }
@@ -43,7 +43,7 @@ export const codingInquire = (value: any)=>{
 export const codingRedact = (value: any)=>{
     return http.request({
         method: 'put',
-        url: `/sys/checkRule/edit`,
+        url: `/sys/fillRule/edit`,
         data:value
     })
 }

@@ -60,6 +60,11 @@ const items = reactive([
         icon: () => h(DesktopOutlined),
         label: '系统编码规则',
         title: '系统编码规则',
+      },{
+        key: '/Main/systemRule',
+        icon: () => h(DesktopOutlined),
+        label: '系统校验规则',
+        title: '系统校验规则',
       },
     ],
   }

@@ -39,6 +39,10 @@ export const constantRoutes: RouteRecordRaw[] = [
                 path: "/Main/codingRule",
                 component: () => import("../../views/body/codingRule.vue"),
                 meta: { hidden: true },
+            },{
+                path: "/Main/systemRule",
+                component: () => import("../../views/body/systemRule.vue"),
+                meta: { hidden: true },
             },
         ]
     }, {

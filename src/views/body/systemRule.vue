@@ -78,7 +78,8 @@
               <template #overlay>
                 <a-menu>
                   <a-menu-item>
-                    <a @click="funTest(data, index)">功能测试</a>p
+                    <!-- <a @click="funTest(data, index)">功能测试</a> -->
+                    <a>功能测试</a>
                   </a-menu-item>
                   <a-menu-item>
                     <a @click="funDele(data, index)">删除</a>
@@ -105,11 +106,11 @@ import ModalCom from "../../components/rule/ModalCom.vue";
 import {
   getList,
   adList,
-  functionalTest,
+  // functionalTest,
   functionalDele,
   codingInquire,
   codingRedact,
-} from "../../api/rule/coding";
+} from "../../api/rule/system";
 let data: any = ref([]);
 
 // 获取列表数据
@@ -122,7 +123,7 @@ const getListFun = async () => {
     _t: 1691977266055,
   });
   data.value = list.result.records;
-  // console.log(data.value, 1243423);
+  console.log(data.value, 1243423);
 };
 
 onMounted(() => {
@@ -150,7 +151,7 @@ const formInquire = async () => {
     ruleName: formState.username,
     ruleCode: formState.password,
   });
-  console.log(data.value, inquire.result.records[0]);
+  console.log(data.value, inquire.result.records);
 
   data.value = inquire.result.records;
 };
@@ -166,7 +167,7 @@ interface DataType {
   key: string;
   ruleName: string;
   ruleCode: number;
-  address: string;
+  ruleDescription: string;
 }
 const columns: TableColumnType<DataType>[] = [
   {
@@ -184,12 +185,8 @@ const columns: TableColumnType<DataType>[] = [
     dataIndex: "ruleCode",
   },
   {
-    title: "规则实现类",
-    dataIndex: "ruleClass",
-  },
-  {
-    title: "规则参数",
-    dataIndex: "ruleParams",
+    title: "规则描述",
+    dataIndex: "ruleDescription",
   },
   {
     title: "操作",
@@ -258,21 +255,21 @@ const addList = async (aa: any, bb: any) => {
   (codingMess = []), getListFun();
 };
 // 功能测试
-const funTest = async (
-  list: { [x: string]: { id: any } },
-  index: string | number
-) => {
-  let funcbody: any = await functionalTest({
-    ruleCode: list[index].ruleCode,
-    _t: list[index].id,
-  });
-  Modal.success({
-    title: "填值规则功能测试",
-    class: "ant-coding",
-    content: h("div", {}, [h("p", `生成结果：${funcbody.result[0]} `)]),
-  });
-  // console.log(test.value);
-};
+// const funTest = async (
+//   list: { [x: string]: { id: any } },
+//   index: string | number
+// ) => {
+//   let funcbody: any = await functionalTest({
+//     ruleCode: list[index].ruleCode,
+//     _t: list[index].id,
+//   });
+//   Modal.success({
+//     title: "填值规则功能测试",
+//     class: "ant-coding",
+//     content: h("div", {}, [h("p", `生成结果：${funcbody.result[0]} `)]),
+//   });
+//   // console.log(test.value);
+// };
 // 删除
 const funDele = async (
   list: { [x: string]: { id: any } },
