@@ -35,9 +35,14 @@ export const constantRoutes: RouteRecordRaw[] = [
                 name: 'allocation',
                 path: '/Main/allocation',
                 component: () => import('@/views/exploit/OnlineAllocation.vue'),
+            }, {
+                name: 'MenuManagement',
+                path: '/Main/SystemManagement',
+                component: () => import('@/views/SystemManagement/MenuManagement.vue')
             }
         ]
-    }, {
+    },
+    {
         path: '/404',
         name: '404',
         component: () => import('@/views/error-page/404.vue')

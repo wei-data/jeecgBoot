@@ -57,6 +57,18 @@ const items = reactive([
         title: 'Online报表配置',
       },
     ],
+  },
+  {
+    key: 'SystemManagement',
+    icon: () => h(DesktopOutlined),
+    label: '系统管理',
+    title: '系统管理',
+    children: [{
+      key: '/Main/SystemManagement',
+      icon: () => h(DesktopOutlined),
+      label: '菜单管理',
+      title: '菜单管理'
+    }]
   }
 ]);
 // {

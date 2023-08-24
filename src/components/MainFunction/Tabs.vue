@@ -1,12 +1,13 @@
 <template>
-  <a-tabs style="height: 36px" @change="routeSkip" size="small" v-model:activeKey="activeKey" type="editable-card"  hide-add @edit="onEdit">
+  <a-tabs style="height: 36px" @change="routeSkip" size="small" v-model:activeKey="activeKey" type="editable-card"
+    hide-add @edit="onEdit">
     <a-tab-pane v-for="pane in panes" :key="pane.key" :tab="pane.title" :closable="pane.closable">
     </a-tab-pane>
   </a-tabs>
 </template>
 <script lang="ts" setup>
-import {onMounted, ref, watch} from 'vue';
-import {useRouter,useRoute} from "vue-router";
+import { onMounted, ref, watch } from 'vue';
+import { useRouter, useRoute } from "vue-router";
 // import type { TabsProps } from 'ant-design-vue';
 // import {DownOutlined} from "@ant-design/icons-vue";
 
@@ -14,7 +15,7 @@ const router = useRouter();
 const route = useRoute()
 // console.log(router)
 const panes = ref<{ title: string; content?: string; key: string; closable?: boolean }[]>([
-  { title: '首页', key: '/Main/index',closable: false },
+  { title: '首页', key: '/Main/index', closable: false },
 ]);
 // const callback: TabsProps['onTabScroll'] = val => {
 //   console.log(val);
@@ -40,14 +41,14 @@ const remove = (targetKey: string) => {
 };
 // 进行删除调用
 const onEdit = (targetKey: string | MouseEvent) => {
-    remove(targetKey as string);
-    router.push({
-      path: activeKey.value
-    })
+  remove(targetKey as string);
+  router.push({
+    path: activeKey.value
+  })
 };
 
 // 监听tab变化的函数
-const routeSkip = (item:any)=>{
+const routeSkip = (item: any) => {
   router.push({
     path: item
   })
@@ -64,34 +65,34 @@ interface OBJ {
   title: string;
   key: string
 }
-const add = (items:any) => {
+const add = (items: any) => {
   panes.value.push({ title: items.item.title, key: items.key });
-  panes.value = panes.value.reduce((acc, obj:OBJ) => {
-    const existingObj = acc.find((item:any) => JSON.stringify(`${item.key}`) === JSON.stringify(`${obj.key}`));
+  panes.value = panes.value.reduce((acc, obj: OBJ) => {
+    const existingObj = acc.find((item: any) => JSON.stringify(`${item.key}`) === JSON.stringify(`${obj.key}`));
     if (!existingObj) {
       acc.push(obj)
     }
     return acc;
   }, []);
 };
-watch(() => props.item.key,()=>{
+watch(() => props.item.key, () => {
   add(props.item)
   activeKey.value = props.item.key
   router.push({
     path: activeKey.value
   })
-},{
+}, {
   // immediate:true
 })
-onMounted(()=>{
-  if(route.path!== panes.value[0].key){
+onMounted(() => {
+  if (route.path !== panes.value[0].key) {
     const obj = {
       item: {
         title: route.name
       },
       key: route.path
     }
-      add(obj)
+    add(obj)
   }
 })
 </script>
